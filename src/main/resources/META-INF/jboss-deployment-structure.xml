@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <deployment>
+        <module-alias name="deployment.keycloak-hcaptcha"/>
+        <dependencies>
+            <module name="org.keycloak.keycloak-services"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
