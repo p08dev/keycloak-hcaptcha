@@ -38,74 +38,74 @@ public class RegistrationhCaptcha implements FormAction, FormActionFactory {
     public static final String HCAPTCHA_REFERENCE_CATEGORY = "hcaptcha";
     public static final String SITE_KEY = "site.key";
     public static final String SITE_SECRET = "secret";
-    
+
     public static final String PROVIDER_ID = "registration-hcaptcha-action";
 
-	@Override
-	public void close() {
-		
-	}
+    @Override
+    public void close() {
 
-	@Override
-	public FormAction create(KeycloakSession session) {
-		return this;
-	}
+    }
 
-	@Override
-	public void init(Scope config) {
-		
-	}
+    @Override
+    public FormAction create(KeycloakSession session) {
+        return this;
+    }
 
-	@Override
-	public void postInit(KeycloakSessionFactory factory) {
-		
-	}
+    @Override
+    public void init(Scope config) {
 
-	@Override
-	public String getId() {
-		return PROVIDER_ID;
-	}
+    }
 
-	@Override
-	public String getDisplayType() {
-		return "hCaptcha";
-	}
+    @Override
+    public void postInit(KeycloakSessionFactory factory) {
 
-	@Override
-	public String getReferenceCategory() {
-		return HCAPTCHA_REFERENCE_CATEGORY;
-	}
+    }
 
-	@Override
-	public boolean isConfigurable() {
-		return true;
-	}
+    @Override
+    public String getId() {
+        return PROVIDER_ID;
+    }
 
-	private static AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
+    @Override
+    public String getDisplayType() {
+        return "hCaptcha";
+    }
+
+    @Override
+    public String getReferenceCategory() {
+        return HCAPTCHA_REFERENCE_CATEGORY;
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    private static AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
             AuthenticationExecutionModel.Requirement.REQUIRED,
             AuthenticationExecutionModel.Requirement.DISABLED
     };
-	@Override
-	public Requirement[] getRequirementChoices() {
-		return REQUIREMENT_CHOICES;
-	}
+    @Override
+    public Requirement[] getRequirementChoices() {
+        return REQUIREMENT_CHOICES;
+    }
 
-	@Override
-	public boolean isUserSetupAllowed() {
-		return false;
-	}
+    @Override
+    public boolean isUserSetupAllowed() {
+        return false;
+    }
 
-	@Override
-	public String getHelpText() {
-		return "Adds hCaptcha button.  hCaptchas verify that the entity that is registering is a human.  This can only be used on the internet and must be configured after you add it.";
-	}
-	
+    @Override
+    public String getHelpText() {
+        return "Adds hCaptcha button.  hCaptchas verify that the entity that is registering is a human.  This can only be used on the internet and must be configured after you add it.";
+    }
 
-	@Override
-	public void buildPage(FormContext context, LoginFormsProvider form) {
+
+    @Override
+    public void buildPage(FormContext context, LoginFormsProvider form) {
         AuthenticatorConfigModel captchaConfig = context.getAuthenticatorConfig();
         String userLanguageTag = context.getSession().getContext().resolveLocale(context.getUser()).toLanguageTag();
-        
+
         if (captchaConfig == null || captchaConfig.getConfig() == null
                 || captchaConfig.getConfig().get(SITE_KEY) == null
                 || captchaConfig.getConfig().get(SITE_SECRET) == null
@@ -113,18 +113,18 @@ public class RegistrationhCaptcha implements FormAction, FormActionFactory {
             form.addError(new FormMessage(null, Messages.RECAPTCHA_NOT_CONFIGURED));
             return;
         }
-        
+
         String siteKey = captchaConfig.getConfig().get(SITE_KEY);
         String compact = captchaConfig.getConfig().get("compact");
         form.setAttribute("hcaptchaRequired", true);
         form.setAttribute("hcaptchaCompact", compact);
         form.setAttribute("hcaptchaSiteKey", siteKey);
         form.addScript("https://js.hcaptcha.com/1/api.js?hl=" + userLanguageTag);
-		
-	}
 
-	@Override
-	public void validate(ValidationContext context) {
+    }
+
+    @Override
+    public void validate(ValidationContext context) {
 
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
         List<FormMessage> errors = new ArrayList<>();
@@ -149,9 +149,9 @@ public class RegistrationhCaptcha implements FormAction, FormActionFactory {
             return;
 
         }
-		
-	}
-	
+
+    }
+
 
     protected boolean validateRecaptcha(ValidationContext context, boolean success, String captcha, String secret) {
         CloseableHttpClient httpClient = context.getSession().getProvider(HttpClientProvider.class).getHttpClient();
@@ -167,7 +167,7 @@ public class RegistrationhCaptcha implements FormAction, FormActionFactory {
                 InputStream content = response.getEntity().getContent();
                 try {
                     @SuppressWarnings("rawtypes")
-					Map json = JsonSerialization.readValue(content, Map.class);
+                    Map json = JsonSerialization.readValue(content, Map.class);
                     Object val = json.get("success");
                     success = Boolean.TRUE.equals(val);
                 } finally {
@@ -180,25 +180,25 @@ public class RegistrationhCaptcha implements FormAction, FormActionFactory {
         return success;
     }
 
-	@Override
-	public void success(FormContext context) {
-		
-	}
+    @Override
+    public void success(FormContext context) {
 
-	@Override
-	public boolean requiresUser() {
-		return false;
-	}
+    }
 
-	@Override
-	public boolean configuredFor(KeycloakSession session, RealmModel realm, UserModel user) {
-		return true;
-	}
+    @Override
+    public boolean requiresUser() {
+        return false;
+    }
 
-	@Override
-	public void setRequiredActions(KeycloakSession session, RealmModel realm, UserModel user) {
-		
-	}
+    @Override
+    public boolean configuredFor(KeycloakSession session, RealmModel realm, UserModel user) {
+        return true;
+    }
+
+    @Override
+    public void setRequiredActions(KeycloakSession session, RealmModel realm, UserModel user) {
+
+    }
 
     private static final List<ProviderConfigProperty> CONFIG_PROPERTIES = new ArrayList<ProviderConfigProperty>();
 
@@ -224,9 +224,9 @@ public class RegistrationhCaptcha implements FormAction, FormActionFactory {
         CONFIG_PROPERTIES.add(property);
     }
 
-	@Override
-	public List<ProviderConfigProperty> getConfigProperties() {
-		return CONFIG_PROPERTIES;
-	}
+    @Override
+    public List<ProviderConfigProperty> getConfigProperties() {
+        return CONFIG_PROPERTIES;
+    }
 
 }
