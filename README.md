@@ -4,7 +4,7 @@ To safeguard registration against bots, Keycloak has integration with Google reC
 
 ## Installation
 
-Download the newest release JAR (or comile it yourself) and drop it into `your_keycloak_installation/standalone/deployments`
+Download the newest release JAR (or comile it yourself) and drop it into `your_keycloak_installation/providers`
 
 There are a few steps you need to perform in the Keycloak Admin Console. Click the Authentication left menu item and go to the Flows tab. Select the Registration flow from the drop down list on this page.
 
