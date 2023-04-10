@@ -1,5 +1,7 @@
 # keycloak-hcaptcha
 
+> I am currently not adding any new features, updates or fixes. Feel free to open a PR!
+
 To safeguard registration against bots, Keycloak has integration with Google reCAPTCHA. This provides similar functionality, but with a more privacy friendly provider named hCaptcha. The code is based on the vanilla implementation of reCAPTCHA in Keycloak.
 
 ## Installation
