@@ -25,7 +25,7 @@ import org.keycloak.services.messages.Messages;
 import org.keycloak.services.validation.Validation;
 import org.keycloak.util.JsonSerialization;
 
-import javax.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.MultivaluedMap;
 
 import java.io.InputStream;
 import java.util.ArrayList;
