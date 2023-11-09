@@ -6,7 +6,7 @@ To safeguard registration against bots, Keycloak has integration with Google reC
 
 ## Installation
 
-Download the newest release JAR (or comile it yourself) and drop it into `your_keycloak_installation/providers`
+Download the newest release JAR (or compile it yourself - see below) and drop it into `your_keycloak_installation/providers`
 
 There are a few steps you need to perform in the Keycloak Admin Console. Click the Authentication left menu item and go to the Flows tab. Select the Registration flow from the drop down list on this page.
 
@@ -28,7 +28,7 @@ Authorizing Iframes
 
 To show the hCaptcha you need to modify the registration template. You can find the files in your Keycloak installation under `themes/base/login/`. If you use the user profile preview (you start your Keycloak with the `-Dkeycloak.profile=preview` flag), you need to edit the `register-user-profile.ftl`, else the `register.ftl`. Add the following code beneith the reCaptcha code:
 
-```
+```html
 <#if hcaptchaRequired??>
     <div class="form-group">
         <div class="${properties.kcInputWrapperClass!}">
@@ -45,6 +45,26 @@ In the last step you have to change the registration flow to the newly created o
 
 Authentication Bindings
 ![Step 6](img/step-06.png)
+
+## Compiling it yourself
+
+Clone the repository:
+
+```bash
+git clone https://github.com/p08dev/keycloak-hcaptcha.git
+```
+
+Inside the repository, compile it using Maven with Java 17:
+
+```bash
+mvn clean compile package
+```
+
+You can instruct Maven to use a specific Java version by prepending the JAVA_HOME environment variable:
+
+```bash
+JAVA_HOME=/usr/lib/jvm/java-17-oracle/ mvn clean compile package
+```
 
 ## © License
 [MIT](LICENSE)
