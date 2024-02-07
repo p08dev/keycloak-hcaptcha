@@ -21,7 +21,7 @@ Set the 'hCaptcha' requirement to Required by clicking the appropriate radio but
 hCaptcha Config Page
 ![Step 3](img/step-03.png)
 
-Now you have to do is to change some default HTTP response headers that Keycloak sets. Keycloak will prevent a website from including any login page within an iframe. This is to prevent clickjacking attacks. You need to authorize hCaptcha to use the registration page within an iframe. Go to the Realm Settings left menu item and then go to the Security Defenses tab. You will need to add https://newassets.hcaptcha.com to the values of both the X-Frame-Options and Content-Security-Policy headers.
+Now you have to do is to change some default HTTP response headers that Keycloak sets. Keycloak will prevent a website from including any login page within an iframe. This is to prevent clickjacking attacks. You need to authorize hCaptcha to use the registration page within an iframe. Go to the Realm Settings left menu item and then go to the Security Defenses tab. You will need to add https://newassets.hcaptcha.com to the value of the Content-Security-Policy headers. In the image they are also in the X-Frame-Options, but this is not needed (you can ignore it).
 
 Authorizing Iframes
 ![Step 4](img/step-04.png)
